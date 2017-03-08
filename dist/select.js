@@ -1,7 +1,11 @@
 /*!
  * ui-select
  * http://github.com/angular-ui/ui-select
+<<<<<<< HEAD
  * Version: 0.19.7 - 2017-04-15T14:28:36.649Z
+=======
+ * Version: 0.19.6 - 2017-03-08T04:21:53.759Z
+>>>>>>> 7f00936... 0.19.6
  * License: MIT
  */
 
@@ -264,12 +268,20 @@ uis.directive('uiSelectChoices',
 
       return function link(scope, element, attrs, $select) {
 
+<<<<<<< HEAD
 
         $select.parseRepeatAttr(attrs.repeat, groupByExp, groupFilterExp); //Result ready at $select.parserResult
         $select.disableChoiceExpression = attrs.uiDisableChoice;
         $select.onHighlightCallback = attrs.onHighlight;
         $select.minimumInputLength = parseInt(attrs.minimumInputLength) || 0;
         $select.dropdownPosition = attrs.position ? attrs.position.toLowerCase() : uiSelectConfig.dropdownPosition;
+=======
+       
+        $select.parseRepeatAttr(attrs.repeat, groupByExp, groupFilterExp); //Result ready at $select.parserResult
+        $select.disableChoiceExpression = attrs.uiDisableChoice;
+        $select.onHighlightCallback = attrs.onHighlight;
+        $select.dropdownPosition = attrs.position ? attrs.position.toLowerCase() : uiSelectConfig.dropdownPosition;        
+>>>>>>> 7f00936... 0.19.6
 
         scope.$watch('$select.search', function(newValue) {
           if(newValue && !$select.open && $select.multiple) $select.activate(false, true);
@@ -599,6 +611,7 @@ uis.controller('uiSelectCtrl',
         $timeout.cancel(_refreshDelayPromise);
       }
       _refreshDelayPromise = $timeout(function() {
+<<<<<<< HEAD
         if ($scope.$select.search.length >= $scope.$select.minimumInputLength) {
           var refreshPromise = $scope.$eval(refreshAttr);
           if (refreshPromise && angular.isFunction(refreshPromise.then) && !ctrl.refreshing) {
@@ -609,6 +622,15 @@ uis.controller('uiSelectCtrl',
           }
         }
       }, ctrl.refreshDelay);
+=======
+        var refreshPromise =  $scope.$eval(refreshAttr);
+        if (refreshPromise && angular.isFunction(refreshPromise.then) && !ctrl.refreshing) {
+          ctrl.refreshing = true;
+          refreshPromise.finally(function() {
+            ctrl.refreshing = false;
+          });
+      }}, ctrl.refreshDelay);
+>>>>>>> 7f00936... 0.19.6
     }
   };
 
@@ -730,6 +752,11 @@ uis.controller('uiSelectCtrl',
             ctrl.close(skipFocusser);
             return;
           }
+<<<<<<< HEAD
+=======
+        } else if ( typeof item === 'string') {
+          item = item.replace(ctrl.taggingLabel,'').trim();
+>>>>>>> 7f00936... 0.19.6
         }
         _resetSearchInput();
         $scope.$broadcast('uis:select', item);
@@ -1710,7 +1737,11 @@ uis.directive('uiSelectMultiple', ['uiSelectMinErr','$timeout', function(uiSelec
           return;
         }
         $select.selected.push(item);
+<<<<<<< HEAD
         var locals = {};
+=======
+        var locals = {};        
+>>>>>>> 7f00936... 0.19.6
         locals[$select.parserResult.itemName] = item;
 
         $timeout(function(){
@@ -2072,6 +2103,7 @@ uis.directive('uiSelectSingle', ['$timeout','$compile', function($timeout, $comp
 
       scope.$on('uis:select', function (event, item) {
         $select.selected = item;
+<<<<<<< HEAD
         var locals = {};
         locals[$select.parserResult.itemName] = item;
 
@@ -2079,6 +2111,15 @@ uis.directive('uiSelectSingle', ['$timeout','$compile', function($timeout, $comp
           $select.onSelectCallback(scope, {
             $item: item,
             $model: isNil(item) ? item : $select.parserResult.modelMapper(scope, locals)
+=======
+        var locals = {};        
+        locals[$select.parserResult.itemName] = item;
+
+        $timeout(function(){
+          $select.onSelectCallback(scope, {
+            $item: item,
+            $model: $select.parserResult.modelMapper(scope, locals)
+>>>>>>> 7f00936... 0.19.6
           });
         });
       });
