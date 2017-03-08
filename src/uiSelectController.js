@@ -425,6 +425,8 @@ uis.controller('uiSelectCtrl',
             ctrl.close(skipFocusser);
             return;
           }
+        } else if ( typeof item === 'string') {
+          item = item.replace(ctrl.taggingLabel,'').trim();
         }
         _resetSearchInput();
         $scope.$broadcast('uis:select', item);
