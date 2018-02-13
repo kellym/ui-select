@@ -443,7 +443,7 @@ uis.controller('uiSelectCtrl',
             ctrl.close(skipFocusser);
             return;
           }
-        } else if ( typeof item === 'string') {
+        } else if ( typeof item === 'string' ) {
           item = _replaceTaggingLabelAndTrim(item, ctrl.taggingLabel);
         }
         _resetSearchInput();
